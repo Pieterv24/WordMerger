@@ -1,0 +1,11 @@
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Debug\WordMerger.exe.config
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Debug\WordMerger.exe
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Debug\WordMerger.pdb
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.csprojResolveAssemblyReference.cache
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.Properties.Resources.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.csproj.GenerateResource.Cache
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.exe
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.pdb
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.csproj.ResolveComReference.cache
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.MainProgram.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.Merger.resources
