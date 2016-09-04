@@ -98,7 +98,7 @@ namespace WordMerger
         private void downButton_Click(object sender, EventArgs e)
         {
             int checkedListItem = checkedListBox1.CheckedIndices[0];
-            if (checkedListItem + 1 >= 0 && checkedListItem < pathList.Count)
+            if (checkedListItem + 1 >= 0 && checkedListItem + 1 < pathList.Count)
             {
                 string path = pathList[checkedListItem];
                 pathList.RemoveAt(checkedListItem);
@@ -106,6 +106,28 @@ namespace WordMerger
                 FillList();
                 checkedListBox1.SetItemChecked(checkedListItem + 1, true);
             }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (pathList.Count > 1)
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string savePath = saveFileDialog1.FileName;
+                    Merger myMerger = new Merger(pathList.ToArray(), savePath);
+                    myMerger.StartMergeDocument();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please 2 or more select files to merge");
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

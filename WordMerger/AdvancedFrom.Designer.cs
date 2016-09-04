@@ -33,17 +33,19 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.AddFile = new System.Windows.Forms.ToolStripButton();
             this.RemoveButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.upButton = new System.Windows.Forms.ToolStripButton();
             this.downButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.startButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.addFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergeDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,8 +67,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1264, 24);
@@ -76,6 +77,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFilesToolStripMenuItem,
+            this.mergeDocumentsToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -84,14 +87,9 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -101,9 +99,9 @@
             this.toolStripSeparator1,
             this.upButton,
             this.downButton,
-            this.toolStripButton4,
             this.toolStripSeparator2,
-            this.refreshButton});
+            this.refreshButton,
+            this.startButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1264, 25);
@@ -155,15 +153,15 @@
             this.downButton.Text = "Move selected items down";
             this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
-            // toolStripButton4
+            // startButton
             // 
-            this.toolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "Start Merging";
+            this.startButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.startButton.Image = ((System.Drawing.Image)(resources.GetObject("startButton.Image")));
+            this.startButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(23, 22);
+            this.startButton.Text = "Start Merging";
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -184,6 +182,25 @@
             // 
             this.openFileDialog1.Filter = "Word Document (*.doc,*.docx,*.odt)|*.doc;*.docx;*.odt|All files|*.*";
             this.openFileDialog1.Multiselect = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "docx";
+            this.saveFileDialog1.Filter = "Word Document|*.docx|Word 2003 Document|*.doc|OpenDocument Text|*.odt";
+            // 
+            // addFilesToolStripMenuItem
+            // 
+            this.addFilesToolStripMenuItem.Name = "addFilesToolStripMenuItem";
+            this.addFilesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addFilesToolStripMenuItem.Text = "Add File(s)";
+            this.addFilesToolStripMenuItem.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // mergeDocumentsToolStripMenuItem
+            // 
+            this.mergeDocumentsToolStripMenuItem.Name = "mergeDocumentsToolStripMenuItem";
+            this.mergeDocumentsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.mergeDocumentsToolStripMenuItem.Text = "Merge Documents";
+            this.mergeDocumentsToolStripMenuItem.Click += new System.EventHandler(this.startButton_Click);
             // 
             // AdvancedFrom
             // 
@@ -210,16 +227,18 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton AddFile;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton upButton;
         private System.Windows.Forms.ToolStripButton downButton;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton startButton;
         private System.Windows.Forms.ToolStripButton refreshButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripButton RemoveButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem addFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mergeDocumentsToolStripMenuItem;
     }
 }
