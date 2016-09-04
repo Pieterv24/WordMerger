@@ -9,3 +9,4 @@ D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\W
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.csproj.ResolveComReference.cache
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.MainProgram.resources
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.Merger.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Debug\WordMerger.AdvancedFrom.resources
