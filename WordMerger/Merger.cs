@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -22,11 +18,19 @@ namespace WordMerger
 
         public Merger(string[] paths, string destination, int start = 0)
         {
+            ResourceManager rm = new ResourceManager("WordMerger.strings", typeof(AdvancedFrom).Assembly);
+
             InitializeComponent();
+
+            //Add localization code
+            this.Text = rm.GetString("MergeWindowTitle");
+            button2.Text = rm.GetString("Done");
+            button1.Text = rm.GetString("Cancel");
+
             this.paths = paths;
             this.destination = destination;
             this.start = start;
-            this.Show();
+            this.ShowDialog();
         }
 
         public void StartMergeDocument()

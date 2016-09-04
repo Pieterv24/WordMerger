@@ -2,10 +2,15 @@ D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Release
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.csproj.ResolveComReference.cache
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Release\WordMerger.exe
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Release\WordMerger.pdb
-D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.MainProgram.resources
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.Merger.resources
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.Properties.Resources.resources
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.csproj.GenerateResource.Cache
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.exe
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.pdb
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.csprojResolveAssemblyReference.cache
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\bin\Release\nl-NL\WordMerger.resources.dll
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.AdvancedFrom.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.strings.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.strings.nl-NL.resources
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\nl-NL\WordMerger.resources.dll
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.ChangeLanguage.resources

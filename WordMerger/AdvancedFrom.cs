@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Resources;
+using System.Threading;
 
 namespace WordMerger
 {
@@ -18,11 +15,29 @@ namespace WordMerger
 
         public AdvancedFrom()
         {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.Language);
+            ResourceManager rm = new ResourceManager("WordMerger.strings", typeof(AdvancedFrom).Assembly);
             InitializeComponent();
+
+            //Set localization strings
+            this.Text = rm.GetString("AppName");
+            fileToolStripMenuItem.Text = rm.GetString("fileToolStripItem");
+            closeToolStripMenuItem.Text = rm.GetString("closeToolstripItem");
+            AddFile.Text = rm.GetString("AddFileMenuButton");
+            upButton.Text = rm.GetString("upButton");
+            downButton.Text = rm.GetString("downButton");
+            startButton.Text = rm.GetString("startButton");
+            refreshButton.Text = rm.GetString("refreshButton");
+            RemoveButton.Text = rm.GetString("RemoveButton");
+            addFilesToolStripMenuItem.Text = rm.GetString("AddFileMenuButton");
+            mergeDocumentsToolStripMenuItem.Text = rm.GetString("startButton");
+            helpToolStripMenuItem.Text = rm.GetString("Help");
+            changeLanguageToolStripMenuItem.Text = rm.GetString("ChangeLanguage");
+
             List<string> args = Environment.GetCommandLineArgs().ToList();
             args.RemoveAt(0);
             pathList.AddRange(args);
-            FillList();
+            FillList(); 
         }
 
         private void FillList()
@@ -128,6 +143,12 @@ namespace WordMerger
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void changeLanguageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeLanguage ch = new ChangeLanguage();
+            ch.ShowDialog();
         }
     }
 }

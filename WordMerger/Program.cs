@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -20,10 +15,22 @@ namespace WordMerger
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            MainForm = new AdvancedFrom();
-            SingleInstanceApplication.Run(MainForm, NewInstanceHandler);
+            if (Environment.GetCommandLineArgs().Contains("-ChLn"))
+            {
+                string[] args = Environment.GetCommandLineArgs();
+                if (args.Length == 3)
+                {
+                    Properties.Settings.Default.Language = args[2];
+                    Properties.Settings.Default.Save();
+                }
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                MainForm = new AdvancedFrom();
+                SingleInstanceApplication.Run(MainForm, NewInstanceHandler);
+            }
         }
 
         public static void NewInstanceHandler(object sender, StartupNextInstanceEventArgs e)
