@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WordMerger.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Language" Type="System.String" Scope="User">
-      <Value Profile="(Default)">nl-NL</Value>
+    <Setting Name="Language" Provider="mySettingsProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en-US</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -24,8 +24,10 @@ namespace WordMerger.Properties {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsProviderAttribute(typeof(mySettingsProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nl-NL")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Language {
             get {
                 return ((string)(this["Language"]));
