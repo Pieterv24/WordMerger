@@ -30,7 +30,7 @@ namespace WordMerger
             this.paths = paths;
             this.destination = destination;
             this.start = start;
-            this.ShowDialog();
+            this.Show();
         }
 
         public void StartMergeDocument()
@@ -39,12 +39,12 @@ namespace WordMerger
             progressBar1.Maximum = paths.Length - start;
             progressBar1.Step = 1;
             progressBar1.Value = 1;
-            
+
+            bgw.WorkerSupportsCancellation = true;
             bgw.ProgressChanged += bgw_ProgressChanged;
             bgw.DoWork += bgw_mergeDocument;
             bgw.WorkerReportsProgress = true;
             bgw.RunWorkerCompleted += bgw_RunCompleted;
-            bgw.WorkerSupportsCancellation = true;
             bgw.RunWorkerAsync();
         }
 

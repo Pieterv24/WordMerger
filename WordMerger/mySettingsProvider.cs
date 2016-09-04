@@ -48,8 +48,9 @@ namespace WordMerger
         public virtual string GetAppSettingsPath()
         {
             //Used to determine where to store the settings
-            System.IO.FileInfo fi = new System.IO.FileInfo(Application.ExecutablePath);
+            System.IO.FileInfo fi = new System.IO.FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Pieterv24\\WordMerger\\");
             return fi.DirectoryName;
+
         }
 
         public virtual string GetAppSettingsFilename()
@@ -69,6 +70,10 @@ namespace WordMerger
 
             try
             {
+                if (!Directory.Exists(GetAppSettingsPath()))
+                {
+                    Directory.CreateDirectory(GetAppSettingsPath());
+                }
                 SettingsXML.Save(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
             }
             catch (Exception ex)

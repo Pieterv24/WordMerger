@@ -87,7 +87,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="strings.nl-NL.Designer.cs">
       <DependentUpon>strings.nl-NL.resx</DependentUpon>
       <AutoGen>True</AutoGen>
