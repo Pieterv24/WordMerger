@@ -41,10 +41,12 @@ namespace WordMerger
         {
             if (args.Length > 1)
             {
-                saveFileDialog1.ShowDialog();
-                string savePath = saveFileDialog1.FileName;
-                Merger myMerger = recievedArgs ? new Merger(args, savePath, 1) : new Merger(args, savePath);
-                myMerger.StartMergeDocument();
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string savePath = saveFileDialog1.FileName;
+                    Merger myMerger = recievedArgs ? new Merger(args, savePath, 1) : new Merger(args, savePath);
+                    myMerger.StartMergeDocument();
+                }
             }
             else
             {

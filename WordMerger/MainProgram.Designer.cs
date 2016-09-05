@@ -67,7 +67,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "docx";
-            this.saveFileDialog1.Filter = "Word Document|*.docx|Word 2003 Document|*.doc";
+            this.saveFileDialog1.Filter = "Word Document|*.docx|Word 2003 Document|*.doc|OpenDocument Text|*.odt";
             // 
             // button2
             // 
@@ -81,6 +81,7 @@
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.Filter = "Word Document|(*doc, *.docx, *.odt)|All files|*.*";
             this.openFileDialog1.Multiselect = true;
             // 
             // button3

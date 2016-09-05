@@ -8,3 +8,4 @@ D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.csproj.GenerateResource.Cache
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.exe
 D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.pdb
+D:\UserData\OneDrive\Documents\Personal\Joelca\WordMerger\WordMerger\obj\Release\WordMerger.csprojResolveAssemblyReference.cache

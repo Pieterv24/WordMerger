@@ -17,7 +17,8 @@ namespace WordMerger
         private string[] paths;
         private string destination;
         private int start;
-        private bool cancelationInvoked = false;
+        BackgroundWorker bgw = new BackgroundWorker();
+        private string[] allowedExtentions = {".doc", ".docx", ".odt"};
 
         public Merger(string[] paths, string destination, int start = 0)
         {
@@ -30,46 +31,74 @@ namespace WordMerger
 
         public void StartMergeDocument()
         {
-            bool madeChange = false;
-            Word.Application application = new Word.Application();
-            Word.Application readApplication = new Word.Application();
-            Word.Document resultDocument = application.Documents.Add();
             progressBar1.Minimum = 1;
             progressBar1.Maximum = paths.Length - start;
             progressBar1.Step = 1;
             progressBar1.Value = 1;
+            
+            bgw.ProgressChanged += bgw_ProgressChanged;
+            bgw.DoWork += bgw_mergeDocument;
+            bgw.WorkerReportsProgress = true;
+            bgw.RunWorkerCompleted += bgw_RunCompleted;
+            bgw.WorkerSupportsCancellation = true;
+            bgw.RunWorkerAsync();
+        }
+
+        private void bgw_mergeDocument(object sender, DoWorkEventArgs e)
+        {
+            bool madeChange = false;
+            Word.Application application = new Word.Application();
+            Word.Application readApplication = new Word.Application();
+            Word.Document resultDocument = application.Documents.Add();
             for (int i = start; i < paths.Length; i++)
             {
-                if (Path.GetExtension(paths[i]) == ".docx" || Path.GetExtension(paths[i]) == ".doc")
+                if (bgw.CancellationPending)
+                {
+                    madeChange = false;
+                    break;
+                }
+                if (allowedExtentions.Contains(Path.GetExtension(paths[i])))
                 {
                     madeChange = true;
                     Word.Document document = readApplication.Documents.Open(@paths[i], ReadOnly: true);
                     resultDocument.Content.Text += document.Content.Text;
                     document.Close();
                 }
-                if (cancelationInvoked)
-                {
-                    madeChange = false;
-                    button2.Enabled = true;
-                    break;
-                }
-                progressBar1.PerformStep();
-                progressBar1.Refresh();
+                ((BackgroundWorker)sender).ReportProgress(2);
             }
-            button2.Enabled = true;
-            button1.Enabled = false;
-            if (madeChange)
+            if (madeChange && !bgw.CancellationPending)
             {
                 resultDocument.SaveAs(@destination);
             }
-            resultDocument.Close();
+            resultDocument.Close(false);
             application.Quit();
             readApplication.Quit();
         }
 
+        private void bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.PerformStep();
+            Console.WriteLine("step taken");
+        }
+
+        private void bgw_RunCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar1.Value = progressBar1.Maximum;
+            button1.Enabled = false;
+            button2.Enabled = true;
+            if (true)
+            {
+                progressBar1.ForeColor = Color.Red;
+                progressBar1.BackColor = Color.Red;
+                progressBar1.Refresh();
+                Update();
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            cancelationInvoked = true;
+            bgw.CancelAsync();
+            button1.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
