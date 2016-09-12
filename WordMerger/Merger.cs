@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -22,7 +18,15 @@ namespace WordMerger
 
         public Merger(string[] paths, string destination, int start = 0)
         {
+            ResourceManager rm = new ResourceManager("WordMerger.strings", typeof(AdvancedFrom).Assembly);
+
             InitializeComponent();
+
+            //Add localization code
+            this.Text = rm.GetString("MergeWindowTitle");
+            button2.Text = rm.GetString("Done");
+            button1.Text = rm.GetString("Cancel");
+
             this.paths = paths;
             this.destination = destination;
             this.start = start;
@@ -35,12 +39,12 @@ namespace WordMerger
             progressBar1.Maximum = paths.Length - start;
             progressBar1.Step = 1;
             progressBar1.Value = 1;
-            
+
+            bgw.WorkerSupportsCancellation = true;
             bgw.ProgressChanged += bgw_ProgressChanged;
             bgw.DoWork += bgw_mergeDocument;
             bgw.WorkerReportsProgress = true;
             bgw.RunWorkerCompleted += bgw_RunCompleted;
-            bgw.WorkerSupportsCancellation = true;
             bgw.RunWorkerAsync();
         }
 
@@ -50,18 +54,25 @@ namespace WordMerger
             Word.Application application = new Word.Application();
             Word.Application readApplication = new Word.Application();
             Word.Document resultDocument = application.Documents.Add();
+            Word.Range resultRange = resultDocument.Range();
             for (int i = start; i < paths.Length; i++)
             {
                 if (bgw.CancellationPending)
                 {
                     madeChange = false;
+                    Console.WriteLine("canceled");
                     break;
                 }
                 if (allowedExtentions.Contains(Path.GetExtension(paths[i])))
                 {
                     madeChange = true;
                     Word.Document document = readApplication.Documents.Open(@paths[i], ReadOnly: true);
-                    resultDocument.Content.Text += document.Content.Text;
+                    foreach (Word.Paragraph paragraph in document.Content.Paragraphs)
+                    {
+                        resultDocument.Content.Paragraphs.Last.Range.Font.Name = paragraph.Range.Font.Name;
+                        resultDocument.Content.Paragraphs.Last.Range.Font.Size = paragraph.Range.Font.Size;
+                        resultDocument.Content.Paragraphs.Last.Range.Text = paragraph.Range.Text;
+                    }
                     document.Close();
                 }
                 ((BackgroundWorker)sender).ReportProgress(2);
@@ -86,13 +97,6 @@ namespace WordMerger
             progressBar1.Value = progressBar1.Maximum;
             button1.Enabled = false;
             button2.Enabled = true;
-            if (true)
-            {
-                progressBar1.ForeColor = Color.Red;
-                progressBar1.BackColor = Color.Red;
-                progressBar1.Refresh();
-                Update();
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)

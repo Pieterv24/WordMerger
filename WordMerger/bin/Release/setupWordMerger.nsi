@@ -75,12 +75,15 @@ Section "Word Merger (required)" MainInstall
 	
 	; File to write to there
 	File WordMerger.exe
+	File  /r "nl-NL"
+	
 	
 	; Write uninstall keys for windows
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "DisplayName" "Word Merger"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "UninstallString" '"$INSTDIR\uninstall.exe"'
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "Publisher" "Pieter Verweij"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "DisplayVersion" "1.0"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "DisplayVersion" "1.2.0.0"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "DisplayIcon" '"$INSTDIR\WordMerger.exe"'
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "NoModify" 1
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\WordMerger" "NoRepair" 1
 	
@@ -100,7 +103,10 @@ SectionEnd
 ; Add right click options
 Section  "Add right click options" RightClick
 	;Create Shortcut
-	CreateShortCut "$SENDTO\Merge Word Documents.lnk" "$INSTDIR\WordMerger.exe"
+	;CreateShortCut "$SENDTO\Merge Word Documents.lnk" "$INSTDIR\WordMerger.exe"
+	WriteRegStr HKCR "Word.Document.12\shell\Merge Documents\command" "" "$INSTDIR\WordMerger.exe $\"%1$\""
+	WriteRegStr HKCR "Word.Document.8\shell\Merge Documents\command" "" "$INSTDIR\WordMerger.exe $\"%1$\""
+	WriteRegStr HKCR "Word.OpenDocumentText.12\shell\Merge Documents\command" "" "$INSTDIR\WordMerger.exe $\"%1$\""
 SectionEnd
 
 ; Description
@@ -122,6 +128,14 @@ Section "Uninstall"
 	DeleteRegKey HKLM "SOFTWARE\WordMerger"
 	DeleteRegKey /ifempty HKCU "Software\WordMerger"
 	
+	; Remove context menu keys
+	DeleteRegKey HKCR "Word.Document.12\shell\Merge Documents"
+	DeleteRegKey /ifempty HKCR "Word.Document.12\shell"
+	DeleteRegKey HKCR ".Word.Document.8\shell\Merge Documents"
+	DeleteRegKey /ifempty HKCR "Word.Document.8\shell"
+	DeleteRegKey HKCR "Word.OpenDocumentText.12\shell\Merge Documents"
+	DeleteRegKey /ifempty HKCR "Word.OpenDocumentText.12\shell"
+	
 	; Remove files and uninstaller
 	Delete $INSTDIR\WordMerger.exe
 	Delete $INSTDIR\uninstall.exe
@@ -131,8 +145,12 @@ Section "Uninstall"
 	Delete "$SENDTO\Merge Word Documents.lnk"
 	
 	; Remove directories
+	RMDir /r "$APPDATA\Pieterv24\WordMerger"
+	RMDir "$APPDATA\Pieterv24"
+	RMDir /r "$INSTDIR\nl-NL"
 	RMDir "$SMPROGRAMS\$StartMenuFolder"
 	RMDir "$INSTDIR"
+	RMDir "$PROGRAMFILES\Pieterv24"
 SectionEnd
 
 Function IsDotNETInstalled
