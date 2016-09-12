@@ -54,7 +54,6 @@ namespace WordMerger
             Word.Application application = new Word.Application();
             Word.Application readApplication = new Word.Application();
             Word.Document resultDocument = application.Documents.Add();
-            Word.Range resultRange = resultDocument.Range();
             for (int i = start; i < paths.Length; i++)
             {
                 if (bgw.CancellationPending)
